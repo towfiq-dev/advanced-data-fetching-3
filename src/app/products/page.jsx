@@ -1,12 +1,17 @@
 import Product from '@/components/product/Product';
 import React from 'react';
 const getProducts = async()=>{
-  try{
-    const res = await fetch('http://localhost:3004/products')
+  // try{
+    const res = await fetch('http://localhost:3004/products', 
+      //{cache: 'force-cache'}
+      //{cache: 'no-store'}
+      {next: {revalidate: 10}}
+
+    )
   return res.json()
-  }catch(error){
-    throw new Error("Failed data fetch");
-  }
+  // }catch(error){
+  //   throw new Error("Failed data fetch");
+  // }
 }
 const productsPage = async() => {
   const products = await getProducts()
